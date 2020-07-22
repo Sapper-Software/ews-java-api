@@ -28,10 +28,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.surevine</groupId>
+    <groupId>com.codekutter</groupId>
     <artifactId>ews-java-api</artifactId>
     
-    <version>2.16-SNAPSHOT</version>
+    <version>2.0-SNAPSHOT</version>
 
     <name>Exchange Web Services Java API</name>
     <description>Exchange Web Services (EWS) Java API</description>
@@ -49,28 +49,9 @@
     </prerequisites>
 
     <organization>
-        <name>Surevine</name>
-        <url>https://www.surevine.com/</url>
+        <name>CodeKutter</name>
+        <url>https://github.com/subhagho/ews-java-api</url>
     </organization>
-
-    <developers>
-        <developer>
-            <id>vboctor</id>
-            <name>Victor Boctor</name>
-            <email>vboctor@users.noreply.github.com</email>
-            <url>http://www.github.com/officedev/ews-java-api</url>
-            <organization>Microsoft</organization>
-            <organizationUrl>http://www.microsoft.com</organizationUrl>
-            <roles>
-                <role>administrator</role>
-                <role>developer</role>
-            </roles>
-            <timezone>America/New_York</timezone>
-            <properties>
-                 <picUrl>http://www.example.com/jdoe/pic</picUrl>
-            </properties>
-        </developer>
-    </developers>
 
     <properties>
         <!-- Eliminates the file encoding warning. Of course, all of your files
@@ -184,40 +165,64 @@
         </profile>
     </profiles>
 
-    <licenses>
-        <license>
-            <name>MIT License</name>
-            <url>http://opensource.org/licenses/MIT</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
 
-    <issueManagement>
-        <url>https://github.com/OfficeDev/ews-java-api/issues</url>
-        <system>GitHub Issues</system>
-    </issueManagement>
-
-    <ciManagement>
-        <system>travis</system>
-        <url>https://travis-ci.org/OfficeDev/ews-java-api</url>
-    </ciManagement>
-
-    <scm>
-        <url>https://github.com/OfficeDev/ews-java-api</url>
-        <connection>scm:git:ssh://git@github.com:OfficeDev/ews-java-api.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:OfficeDev/ews-java-api.git</developerConnection>
-    </scm>
 
     <distributionManagement>
+        <!--repository>
+            <id>internal.repo</id>
+            <name>Temporary Staging Repository</name>
+            <url>file://${zconfig.common.target}/</url>
+        </repository -->
         <snapshotRepository>
-            <id>ossrh-snapshot</id>
+            <id>ossrh</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
+        <!--snapshotRepository>
+            <id>release</id>
+            <url>https://pkgs.dev.azure.com/codekutter/codekutter/_packaging/release/maven/v1</url>
+        </snapshotRepository-->
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+            <id>release</id>
+            <url>https://pkgs.dev.azure.com/codekutter/codekutter/_packaging/release/maven/v1</url>
         </repository>
+        <!-- repository>
+            <id>release</id>
+            <name>Azure DevOps Release</name>
+            <url>https://pkgs.dev.azure.com/codekutter/codekutter/_packaging/release/maven/v1</url>
+        </repository>
+        <snapshotRepository>
+            <id>release</id>
+            <name>Azure DevOps Release</name>
+            <url>https://pkgs.dev.azure.com/codekutter/codekutter/_packaging/release/maven/v1</url>
+        </snapshotRepository -->
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>snapshots-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>release</id>
+            <url>https://pkgs.dev.azure.com/codekutter/codekutter/_packaging/release/maven/v1</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>confluent</id>
+            <url>http://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -331,7 +336,7 @@
                     <target>${javaLanguage.version}</target>
                 </configuration>
             </plugin>
-            <plugin>
+            <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${maven-javadoc-plugin.version}</version>
@@ -348,7 +353,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -418,57 +423,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
-    <reporting>
-        <plugins>
-            <!-- Basic report generation. -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>${maven-project-info-reports-plugin.version}</version>
-            </plugin>
-
-            <!-- Dependency version reporting. Relies on standard version numbering
-                - you should use standard version numbering too!
-                http://mojo.codehaus.org/versions-maven-plugin/version-rules.html -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <version>${versions-maven-plugin.version}</version>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>dependency-updates-report</report>
-                            <report>plugin-updates-report</report>
-                            <report>property-updates-report</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-
-            <!-- Generates the Javadoc for the report. -->
-            <!-- <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc-plugin.version}</version>
-                <configuration>
-                    <linksource>true</linksource>
-                    <additionalparam>${javadoc.doclint.param}</additionalparam>
-                </configuration>
-            </plugin> -->
-
-            <!-- Generates a nice HTML linked source cross-reference. -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <version>${maven-jxr-plugin.version}</version>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>${maven-surefire-report-plugin.version}</version>
-            </plugin>
-        </plugins>
-    </reporting>
 </project>
