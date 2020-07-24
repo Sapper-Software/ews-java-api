@@ -274,6 +274,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.github.rwitzel.streamflyer/streamflyer-core -->
+        <dependency>
+            <groupId>com.github.rwitzel.streamflyer</groupId>
+            <artifactId>streamflyer-core</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
