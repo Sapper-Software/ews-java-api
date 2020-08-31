@@ -23,7 +23,9 @@
 
 package microsoft.exchange.webservices.data.core;
 
+import com.github.rwitzel.streamflyer.core.Modifier;
 import com.github.rwitzel.streamflyer.core.ModifyingReader;
+import com.github.rwitzel.streamflyer.regex.RegexModifier;
 import com.github.rwitzel.streamflyer.xml.InvalidXmlCharacterModifier;
 import microsoft.exchange.webservices.data.core.enumeration.misc.XmlNamespace;
 import microsoft.exchange.webservices.data.core.exception.service.local.ServiceXmlDeserializationException;
@@ -42,6 +44,7 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.*;
 import java.io.*;
+import java.util.regex.Pattern;
 
 /**
  * Defines the EwsXmlReader class.
@@ -91,8 +94,12 @@ public class EwsXmlReader {
         XMLInputFactory inputFactory = XMLInputFactory.newInstance();
         inputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
         Reader reader = new XmlStreamReader(stream);
-        ModifyingReader modifyingReader = new ModifyingReader(reader,
-                new InvalidXmlCharacterModifier("&iquest", InvalidXmlCharacterModifier.XML_11_VERSION));
+        // select the modifier of your choice
+        Modifier myModifier = new RegexModifier("&#x0*[1-8]; | [^\\u0001-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]", Pattern.CASE_INSENSITIVE, "&#63;");
+
+        ModifyingReader modifyingReader = new ModifyingReader(reader, myModifier);
+        //ModifyingReader modifyingReader = new ModifyingReader(reader,
+                //new ExtendedXmlCharacterModifier("&iquest", InvalidXmlCharacterModifier.XML_11_VERSION));
         return inputFactory.createXMLEventReader(modifyingReader);
     }
 
