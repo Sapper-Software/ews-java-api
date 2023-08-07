@@ -197,7 +197,7 @@
         </snapshotRepository -->
         <repository>
             <id>github</id>
-            <name>GitHub Packages</name>
+            <name>Sapper-Software</name>
             <url>https://maven.pkg.github.com/Sapper-Software/codekutter</url>
         </repository>
     </distributionManagement>
