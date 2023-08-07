@@ -173,18 +173,18 @@
             <name>Temporary Staging Repository</name>
             <url>file://${zconfig.common.target}/</url>
         </repository -->
-        <snapshotRepository>
+        <!-- <snapshotRepository>
             <id>ossrh</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
+        </snapshotRepository> -->
         <!--snapshotRepository>
             <id>release</id>
             <url>https://pkgs.dev.azure.com/codekutter/codekutter/_packaging/release/maven/v1</url>
         </snapshotRepository-->
-        <repository>
+        <!-- <repository>
             <id>release</id>
             <url>https://pkgs.dev.azure.com/codekutter/codekutter/_packaging/release/maven/v1</url>
-        </repository>
+        </repository> -->
         <!-- repository>
             <id>release</id>
             <name>Azure DevOps Release</name>
@@ -195,6 +195,11 @@
             <name>Azure DevOps Release</name>
             <url>https://pkgs.dev.azure.com/codekutter/codekutter/_packaging/release/maven/v1</url>
         </snapshotRepository -->
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/Sapper-Software/ews-java-api</url>
+        </repository>
     </distributionManagement>
 
     <repositories>
